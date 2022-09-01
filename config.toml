@@ -1,4 +1,4 @@
-baseURL = "https://danysk.github.io/Template-Hugo-Reveal-Slides"
+baseURL = "https://danysk.github.io/Slides-2022-ACSOS-BoundedElection"
 languageCode = "en-us"
 title = "A Hugo theme for creating Reveal.js presentations"
 disableKinds = ["sitemap", "RSS"]
@@ -21,7 +21,7 @@ unsafe = true
 [markup.highlight]
 #codeFences = false  # use highlight.js 
 codeFences = true  # use hugo highlighting at compile time
-style = "tango"  # set a style for hugo highlighting
+style = "dracula"  # set a style for hugo highlighting
 
 [outputFormats.Reveal]
 baseName = "index"
@@ -46,7 +46,7 @@ enableSourceMap = true
 
 [[params.reveal_hugo.mermaid]]
 startOnLoad = false
-theme = "default"
+theme = "dark"
 fontFamily = "Inconsolata"
 useMaxWidth = false
 
