@@ -1823,96 +1823,304 @@ The network is thus stable in eight rounds (compared to 14 of the recursive vers
 # Bounded Election
 
 **Pros**
-* *Works*
-* Uses solely diffusion, with *no accumulation*
-* Can be *implemented succintly* using frameworks such as aggregate computing
-* Stabilises multiple partitions in *parallel*
-* Supports *prioritisation* and control of the *distance metric*
-* It **proven to be _self-stabilising_** (more in a moment)
+* {{% fragment %}} *Works* {{% /fragment %}}
+* {{% fragment %}}Uses solely diffusion, with *no accumulation* {{% /fragment %}}
+* {{% fragment %}} Can be *implemented succintly* using frameworks such as aggregate computing {{% /fragment %}}
+* {{% fragment %}}Stabilises multiple partitions in *parallel* {{% /fragment %}}
+* {{% fragment %}}Supports *prioritisation* and control of the *distance metric* {{% /fragment %}}
+* {{% fragment %}}It **proven to be _self-stabilising_** (more in a moment) {{% /fragment %}}
 
 **Cons**
+
+{{% fragment %}}
 * As per the recursive version, there are *pathological cases*
   * Can be concocted in simulation
   * The base idea is to place high priority nodes inconveniently, and let the second-highest priority node move continuously across the border of the highest-priority partition, triggering continuous re-adaptation in the whole network
+{{% /fragment %}}
 
+---
 
+{{% section %}}
 
+{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
 
+## Self-stabilisation of Bounded Election
 
+Proof structure:
 
+1. Pick a demonstrably *self-stabilising fragment*
+  <br> $\Rightarrow$ (the *minimising `share`*)
+2. *Re-write* parts of it in a way that *preserves self-stabilisation*
+3. Until you get to an implementation of *Bounded Election*
 
+---
 
+## Proof
 
+#### The minimising `share` pattern
 
+We start from a [proven self-stabilising fragment](https://lmcs.episciences.org/6816):
 
+```
+share(x <- e) { fR(minHoodLoc(fMP(x, s̄), e), x)}
+```
 
+Where `x` is a neighbour field, namely a mapping from each device in the neighbourhood of the executing device with some value.
 
+---
 
+### Rewrite: identity for `fR` 
 
+* `fR(x, p)` is a raising function w.r.t. partial orders of `x` and `p`, with `p` previous value of `x`
+  * Identity over `x` is a [trivially valid replacement](https://doi.org/10.1145/3177774)
 
+```
+share(x <- e) { fR(minHoodLoc(fMP(x, s̄), e), x)}
+```
+$\big\Downarrow$
+```
+share(x <- e) { minHoodLoc(fMP(x, s̄), e) }
+```
 
+---
 
+### Rewrite: local candidacy for `e` 
 
+* `e` is any self-stabilising expression
+* We rewrite it with a triple representing the local candidacy, where:
+  * `value` is the local priority
+  * `distance` is the distance from the leader
+  * `lead` is the unique identifier of the local node
+* Moreover, we assume in our scope:
+  * a `priority` value representing the leader strength
+  * an `id` value representing a unique identifier for the local node
 
+```
+share(x <- e) { minHoodLoc(fMP(x, s̄), e) }
+```
+$\big\Downarrow$
+```
+local <- (value: -priority, distance: 0, lead: id)
+share(x <- local) { minHoodLoc(fMP(x, s̄), local) }
+```
 
+---
 
+### Rewrite: return the `id`
 
+* We want to return only the leader `id`
+* It does not alter the `share` pattern
 
+```
+local <- (value: -priority, distance: 0, lead: id)
+share(x <- local) { minHoodLoc(fMP(x, s̄), local) }
+```
+$\big\Downarrow$
+```
+local <- (value: -priority, distance: 0, lead: id)
+share(x <- local) { minHoodLoc(fMP(x, s̄), local) }.lead
+```
 
+---
 
+### Rewrite: `fMP`
 
+* `fMp(x, s̄)` is a monotonic progressive function of `x`
+* `s̄` are additional arguments that can be passed to the function as far as they are self-stabilising expressions
+* We assume a `metric()` function returning a field of distances from each neighbour
+* We assume a maximum partition `radius`
+* We replace it with a `map` and `filter` functions that:
+  * add the distance to valid neighbor candidacies
+  * remove invalid candidacies
+* It cannot return a field with a value lesser than the lesser value of `x`, and it is thus a valid replacement
 
+```
+local <- (value: -priority, distance: 0, lead: id)
+share(x <- local) { minHoodLoc(fMP(x, s̄), local) }.lead
+```
+$\big\Downarrow$
+```
+local <- (value: -priority, distance: 0, lead: id)
+share(x <- local) {
+  minHoodLoc(
+    x.map { (it.value, it.distance + metric(), id }
+      .filter{ it.distance <= radius && it.id != local.id },
+    local
+  )
+}.lead
+```
+
+
+---
 
+### Minimisation
 
+* `minHoodLoc` is a function selecting the minimum among the field values and the provided local value
+* We assume triples to be ordered based on their components
 
+No rewriting needed, and since:
 
+```
+local <- (value: -priority, distance: 0, lead: id)
+share(x <- local) {
+  minHoodLoc(
+    x.map { (it.value, it.distance + metric(), id }
+      .filter{ it.distance <= radius && it.id != local.id },
+    local
+  )
+}.lead
+```
 
+is a valid implementation of Bounded Election,
 
+**Bounded Election is self stabilising**
+{{% align-right %}} □ {{% /align-right %}} 
 
+{{% /section %}}
 
+---
 
+# Evaluation
 
+| Scale free | Edge | Random |
+| --- | --- | --- |
+| ![](complex-deg.png) | ![](edge.png) | ![](random.png) |
+| Devices switch priority at runtime | Some devices are static | All devices move randomly
+| Tests adaptation transitories  | Tests prioritization effectiveness | Searches for pathological cases
 
+---
 
+{{% section %}}
 
+## Metric
 
+Measuring *adaptation* is not so easy
+* We concocted a metric of *instability*
+* Informally:
+  * how many times every node changed its leader over how many times it could have done so, in the last 10 seconds
+  * **the lesser, the better**
 
+---
 
+### Formally
 
+* let $I$ be the set of all possible device UIDs;
+* let $l^d_t \in I$ be the leader selected in device $d$ at round $t$;
+* let $T$ be the current round;
+* for each device $d$, we consider the set $L^d_{TR} = \{ l^d_{T}, l^d_{T-1}, \dots, l^d_{T-R} \}$ comprising the leaders perceived in a mobile window spanning the last $R+1$ rounds;
+* we then consider the $R$ couples of subsequent leaders
+$S^d = \{ (l^d_i,\ l^d_j)\ |\ \forall j = i + 1;\ l^d_i, l^d_j \in R \}$;
+* we define a function over 2-ples $c: I^2 \to \{0, 1\}$
+$$
+c((k_1, k_2))=
+\begin{cases}
+1,\ k_1 = k_2\\
+0,\ \text{otherwise}\\
+\end{cases}
+$$
+that outputs $1$ iff the elements of the tuple are equal;
+* we then count how many times in the last $R + 1$ rounds the leader has not changed,
+normalised on the considered number of rounds:
+$C^d = \frac{\sum_{x \in S^d} c(x)}{|S^d|}$,
+we consider this a measure of *local instability*;
+* finally, we obtain our global metric of *global instability*
+$Y = \frac{\sum_{d \in I} C^d}{|I|}$
+by normalising the sum of the local contributions.
 
+{{% /section %}}
 
+---
 
+## Compared algorithms
 
+* *Bounded election* (`proposed`)
+* Baseline: *recursive election* (`recursive`)
+  * To measure if and how better parallelisation is
+* Baseline: *sparse-choice* (`classic`)
+  * To compare with the state of the art, as it is the closest and the only one using solely propagation (hence, likely the fastest)
 
+{{% fragment %}}
 
+## Details
 
+* Means of 200 repetitions
+* 100% reproducible, https://github.com/DanySK/experiment-2022-self-stab-leader-election
+* Implemented in [Protelis](https://protelis.github.io/) and [Scafi](https://scafi.github.io/)
+* Simulated in [Alchemist](https://alchemistsimulator.github.io/)
 
+{{% /fragment %}}
 
+---
 
+## Scale-free network
 
+**Expectation**: Sparse-choice and Bounded Election perform similarly, the recursive version is worse
 
+{{% fragment %}}
 
+![](barabasi.svg)
 
+* **Bounded Election** has consistently the *fastest* convergence
+* **All** algorithms *self-stabilised*
+* The **recursive** version is very *sensible* to *changes in the leader priority* (using central leaders makes the algorithm outperform the classic one), Bounded election and Sparse-choice are not
 
+{{% /fragment %}}
 
+---
 
+**Expectation**: Bounded Election performs best, the recursive version should outperform Sparse-choice or be close (prioritization of static nodes should compensate for occasional large disruptions)
 
+## Asymmetric nodes
 
+{{% fragment %}}
 
+![](edge.svg)
 
+* The algorithms behave as forecasted
+* **Bounded Election** performs best, as it can select the stable leaders via *prioritization* and is faster than the recursive to *recover from disruptions*.
+* **Sparse-choice**'s average performance is similar to the **recursive** one, but *more predictable*
 
+{{% /fragment %}}
 
+---
 
+**Expectation**: Nodes moving randomly favor **Sparse-choice**,
+that should perform best as it minimises changes within partitions by competing only on the border.
 
+## Randomly moving nodes
 
+{{% fragment %}}
 
+![](random.svg)
 
+* The behaviour is *surprising*: **Bounded Election** *performs best* again
+* **Sparse-choice** inner-partition stability seems to generate instability globally
+  * Our current hypotesis is that, although the partition core is more stable in the competing solutions, most nodes are in the outskirts and do not enjoy it
+  * Probably, with so much randomness, occasional network-wide disruptions are less impacting than continuous border adjustments
 
+{{% /fragment %}}
 
 
+---
 
+## Conclusion
 
+**Bounded Election** is a *proven self-stabilising* algorithm
+for *multi-leader election*
+that induces *network partitioning* and
+suppors explicit *prioritisation*
+and *arbitrary metrics*.
 
+* It *performs better* than other multi-leader election algorithms in most scenarios
+* *Corner cases* where the behaviour is bad can get built
+  * but it looks pretty *unlikely* that they occur
 
+{{% fragment %}}
 
+### What lies ahead
 
+* More testing is needed to assess how frequently the configuration can induce unwanted behaviour
+* Tackle cases where the behaviour is not ideal
+* Towards a new family of self-stabilising leader election algorithms?
+
+{{% /fragment %}}
