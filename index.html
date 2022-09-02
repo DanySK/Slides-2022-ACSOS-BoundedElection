@@ -1993,15 +1993,48 @@ function chartWithEnvironment(environmentFunction, container) {
 <h1 id="bounded-election-1">Bounded Election</h1>
 <p><strong>Pros</strong></p>
 <ul>
-<li><em>Works</em></li>
-<li>Uses solely diffusion, with <em>no accumulation</em></li>
-<li>Can be <em>implemented succintly</em> using frameworks such as aggregate computing</li>
-<li>Stabilises multiple partitions in <em>parallel</em></li>
-<li>Supports <em>prioritisation</em> and control of the <em>distance metric</em></li>
-<li>It <strong>proven to be <em>self-stabilising</em></strong> (more in a moment)</li>
+<li>
+
+<span class='fragment ' >
+  <em>Works</em>
+</span>
+</li>
+<li>
+
+<span class='fragment ' >
+  Uses solely diffusion, with <em>no accumulation</em>
+</span>
+</li>
+<li>
+
+<span class='fragment ' >
+  Can be <em>implemented succintly</em> using frameworks such as aggregate computing
+</span>
+</li>
+<li>
+
+<span class='fragment ' >
+  Stabilises multiple partitions in <em>parallel</em>
+</span>
+</li>
+<li>
+
+<span class='fragment ' >
+  Supports <em>prioritisation</em> and control of the <em>distance metric</em>
+</span>
+</li>
+<li>
+
+<span class='fragment ' >
+  It <strong>proven to be <em>self-stabilising</em></strong> (more in a moment)
+</span>
+</li>
 </ul>
 <p><strong>Cons</strong></p>
-<ul>
+
+
+<span class='fragment ' >
+  <ul>
 <li>As per the recursive version, there are <em>pathological cases</em>
 <ul>
 <li>Can be concocted in simulation</li>
@@ -2009,6 +2042,300 @@ function chartWithEnvironment(environmentFunction, container) {
 </ul>
 </li>
 </ul>
+
+</span>
+
+</section>
+
+
+<section data-shortcode-section>
+<section data-noprocess data-shortcode-slide
+        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-preload="true"
+        data-transition="slide">
+<h2 id="self-stabilisation-of-bounded-election">Self-stabilisation of Bounded Election</h2>
+<p>Proof structure:</p>
+<ol>
+<li>Pick a demonstrably <em>self-stabilising fragment</em>
+<br> $\Rightarrow$ (the <em>minimising <code>share</code></em>)</li>
+<li><em>Re-write</em> parts of it in a way that <em>preserves self-stabilisation</em></li>
+<li>Until you get to an implementation of <em>Bounded Election</em></li>
+</ol>
+</section><section>
+<h2 id="proof">Proof</h2>
+<h4 id="the-minimising-share-pattern">The minimising <code>share</code> pattern</h4>
+<p>We start from a <a href="https://lmcs.episciences.org/6816">proven self-stabilising fragment</a>:</p>
+<pre tabindex="0"><code>share(x &lt;- e) { fR(minHoodLoc(fMP(x, s̄), e), x)}
+</code></pre><p>Where <code>x</code> is a neighbour field, namely a mapping from each device in the neighbourhood of the executing device with some value.</p>
+</section><section>
+<h3 id="rewrite-identity-for-fr">Rewrite: identity for <code>fR</code></h3>
+<ul>
+<li><code>fR(x, p)</code> is a raising function w.r.t. partial orders of <code>x</code> and <code>p</code>, with <code>p</code> previous value of <code>x</code>
+<ul>
+<li>Identity over <code>x</code> is a <a href="https://doi.org/10.1145/3177774">trivially valid replacement</a></li>
+</ul>
+</li>
+</ul>
+<pre tabindex="0"><code>share(x &lt;- e) { fR(minHoodLoc(fMP(x, s̄), e), x)}
+</code></pre><p>$\big\Downarrow$</p>
+<pre tabindex="0"><code>share(x &lt;- e) { minHoodLoc(fMP(x, s̄), e) }
+</code></pre></section><section>
+<h3 id="rewrite-local-candidacy-for-e">Rewrite: local candidacy for <code>e</code></h3>
+<ul>
+<li><code>e</code> is any self-stabilising expression</li>
+<li>We rewrite it with a triple representing the local candidacy, where:
+<ul>
+<li><code>value</code> is the local priority</li>
+<li><code>distance</code> is the distance from the leader</li>
+<li><code>lead</code> is the unique identifier of the local node</li>
+</ul>
+</li>
+<li>Moreover, we assume in our scope:
+<ul>
+<li>a <code>priority</code> value representing the leader strength</li>
+<li>an <code>id</code> value representing a unique identifier for the local node</li>
+</ul>
+</li>
+</ul>
+<pre tabindex="0"><code>share(x &lt;- e) { minHoodLoc(fMP(x, s̄), e) }
+</code></pre><p>$\big\Downarrow$</p>
+<pre tabindex="0"><code>local &lt;- (value: -priority, distance: 0, lead: id)
+share(x &lt;- local) { minHoodLoc(fMP(x, s̄), local) }
+</code></pre></section><section>
+<h3 id="rewrite-return-the-id">Rewrite: return the <code>id</code></h3>
+<ul>
+<li>We want to return only the leader <code>id</code></li>
+<li>It does not alter the <code>share</code> pattern</li>
+</ul>
+<pre tabindex="0"><code>local &lt;- (value: -priority, distance: 0, lead: id)
+share(x &lt;- local) { minHoodLoc(fMP(x, s̄), local) }
+</code></pre><p>$\big\Downarrow$</p>
+<pre tabindex="0"><code>local &lt;- (value: -priority, distance: 0, lead: id)
+share(x &lt;- local) { minHoodLoc(fMP(x, s̄), local) }.lead
+</code></pre></section><section>
+<h3 id="rewrite-fmp">Rewrite: <code>fMP</code></h3>
+<ul>
+<li><code>fMp(x, s̄)</code> is a monotonic progressive function of <code>x</code></li>
+<li><code>s̄</code> are additional arguments that can be passed to the function as far as they are self-stabilising expressions</li>
+<li>We assume a <code>metric()</code> function returning a field of distances from each neighbour</li>
+<li>We assume a maximum partition <code>radius</code></li>
+<li>We replace it with a <code>map</code> and <code>filter</code> functions that:
+<ul>
+<li>add the distance to valid neighbor candidacies</li>
+<li>remove invalid candidacies</li>
+</ul>
+</li>
+<li>It cannot return a field with a value lesser than the lesser value of <code>x</code>, and it is thus a valid replacement</li>
+</ul>
+<pre tabindex="0"><code>local &lt;- (value: -priority, distance: 0, lead: id)
+share(x &lt;- local) { minHoodLoc(fMP(x, s̄), local) }.lead
+</code></pre><p>$\big\Downarrow$</p>
+<pre tabindex="0"><code>local &lt;- (value: -priority, distance: 0, lead: id)
+share(x &lt;- local) {
+  minHoodLoc(
+    x.map { (it.value, it.distance + metric(), id }
+      .filter{ it.distance &lt;= radius &amp;&amp; it.id != local.id },
+    local
+  )
+}.lead
+</code></pre></section><section>
+<h3 id="minimisation">Minimisation</h3>
+<ul>
+<li><code>minHoodLoc</code> is a function selecting the minimum among the field values and the provided local value</li>
+<li>We assume triples to be ordered based on their components</li>
+</ul>
+<p>No rewriting needed, and since:</p>
+<pre tabindex="0"><code>local &lt;- (value: -priority, distance: 0, lead: id)
+share(x &lt;- local) {
+  minHoodLoc(
+    x.map { (it.value, it.distance + metric(), id }
+      .filter{ it.distance &lt;= radius &amp;&amp; it.id != local.id },
+    local
+  )
+}.lead
+</code></pre><p>is a valid implementation of Bounded Election,</p>
+<p><strong>Bounded Election is self stabilising</strong></p>
+<div style="text-align: right; padding-right: 0em;">
+    □
+</div>
+
+</section>
+</section><section>
+<h1 id="evaluation">Evaluation</h1>
+<table>
+<thead>
+<tr>
+<th>Scale free</th>
+<th>Edge</th>
+<th>Random</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="complex-deg.png" alt=""></td>
+<td><img src="edge.png" alt=""></td>
+<td><img src="random.png" alt=""></td>
+</tr>
+<tr>
+<td>Devices switch priority at runtime</td>
+<td>Some devices are static</td>
+<td>All devices move randomly</td>
+</tr>
+<tr>
+<td>Tests adaptation transitories</td>
+<td>Tests prioritization effectiveness</td>
+<td>Searches for pathological cases</td>
+</tr>
+</tbody>
+</table>
+</section><section>
+
+
+<section data-shortcode-section>
+<h2 id="metric">Metric</h2>
+<p>Measuring <em>adaptation</em> is not so easy</p>
+<ul>
+<li>We concocted a metric of <em>instability</em></li>
+<li>Informally:
+<ul>
+<li>how many times every node changed its leader over how many times it could have done so, in the last 10 seconds</li>
+<li><strong>the lesser, the better</strong></li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h3 id="formally">Formally</h3>
+<ul>
+<li>let $I$ be the set of all possible device UIDs;</li>
+<li>let $l^d_t \in I$ be the leader selected in device $d$ at round $t$;</li>
+<li>let $T$ be the current round;</li>
+<li>for each device $d$, we consider the set $L^d_{TR} = { l^d_{T}, l^d_{T-1}, \dots, l^d_{T-R} }$ comprising the leaders perceived in a mobile window spanning the last $R+1$ rounds;</li>
+<li>we then consider the $R$ couples of subsequent leaders
+$S^d = { (l^d_i,\ l^d_j)\ |\ \forall j = i + 1;\ l^d_i, l^d_j \in R }$;</li>
+<li>we define a function over 2-ples $c: I^2 \to {0, 1}$
+$$
+c((k_1, k_2))=
+\begin{cases}
+1,\ k_1 = k_2\
+0,\ \text{otherwise}\
+\end{cases}
+$$
+that outputs $1$ iff the elements of the tuple are equal;</li>
+<li>we then count how many times in the last $R + 1$ rounds the leader has not changed,
+normalised on the considered number of rounds:
+$C^d = \frac{\sum_{x \in S^d} c(x)}{|S^d|}$,
+we consider this a measure of <em>local instability</em>;</li>
+<li>finally, we obtain our global metric of <em>global instability</em>
+$Y = \frac{\sum_{d \in I} C^d}{|I|}$
+by normalising the sum of the local contributions.</li>
+</ul>
+
+</section>
+</section><section>
+<h2 id="compared-algorithms">Compared algorithms</h2>
+<ul>
+<li><em>Bounded election</em> (<code>proposed</code>)</li>
+<li>Baseline: <em>recursive election</em> (<code>recursive</code>)
+<ul>
+<li>To measure if and how better parallelisation is</li>
+</ul>
+</li>
+<li>Baseline: <em>sparse-choice</em> (<code>classic</code>)
+<ul>
+<li>To compare with the state of the art, as it is the closest and the only one using solely propagation (hence, likely the fastest)</li>
+</ul>
+</li>
+</ul>
+
+
+<span class='fragment ' >
+  <h2 id="details">Details</h2>
+<ul>
+<li>Means of 200 repetitions</li>
+<li>100% reproducible, <a href="https://github.com/DanySK/experiment-2022-self-stab-leader-election">https://github.com/DanySK/experiment-2022-self-stab-leader-election</a></li>
+<li>Implemented in <a href="https://protelis.github.io/">Protelis</a> and <a href="https://scafi.github.io/">Scafi</a></li>
+<li>Simulated in <a href="https://alchemistsimulator.github.io/">Alchemist</a></li>
+</ul>
+
+</span>
+
+</section><section>
+<h2 id="scale-free-network">Scale-free network</h2>
+<p><strong>Expectation</strong>: Sparse-choice and Bounded Election perform similarly, the recursive version is worse</p>
+
+
+<span class='fragment ' >
+  <p><img src="barabasi.svg" alt=""></p>
+<ul>
+<li><strong>Bounded Election</strong> has consistently the <em>fastest</em> convergence</li>
+<li><strong>All</strong> algorithms <em>self-stabilised</em></li>
+<li>The <strong>recursive</strong> version is very <em>sensible</em> to <em>changes in the leader priority</em> (using central leaders makes the algorithm outperform the classic one), Bounded election and Sparse-choice are not</li>
+</ul>
+
+</span>
+
+</section><section>
+<p><strong>Expectation</strong>: Bounded Election performs best, the recursive version should outperform Sparse-choice or be close (prioritization of static nodes should compensate for occasional large disruptions)</p>
+<h2 id="asymmetric-nodes">Asymmetric nodes</h2>
+
+
+<span class='fragment ' >
+  <p><img src="edge.svg" alt=""></p>
+<ul>
+<li>The algorithms behave as forecasted</li>
+<li><strong>Bounded Election</strong> performs best, as it can select the stable leaders via <em>prioritization</em> and is faster than the recursive to <em>recover from disruptions</em>.</li>
+<li><strong>Sparse-choice</strong>&rsquo;s average performance is similar to the <strong>recursive</strong> one, but <em>more predictable</em></li>
+</ul>
+
+</span>
+
+</section><section>
+<p><strong>Expectation</strong>: Nodes moving randomly favor <strong>Sparse-choice</strong>,
+that should perform best as it minimises changes within partitions by competing only on the border.</p>
+<h2 id="randomly-moving-nodes">Randomly moving nodes</h2>
+
+
+<span class='fragment ' >
+  <p><img src="random.svg" alt=""></p>
+<ul>
+<li>The behaviour is <em>surprising</em>: <strong>Bounded Election</strong> <em>performs best</em> again</li>
+<li><strong>Sparse-choice</strong> inner-partition stability seems to generate instability globally
+<ul>
+<li>Our current hypotesis is that, although the partition core is more stable in the competing solutions, most nodes are in the outskirts and do not enjoy it</li>
+<li>Probably, with so much randomness, occasional network-wide disruptions are less impacting than continuous border adjustments</li>
+</ul>
+</li>
+</ul>
+
+</span>
+
+</section><section>
+<h2 id="conclusion">Conclusion</h2>
+<p><strong>Bounded Election</strong> is a <em>proven self-stabilising</em> algorithm
+for <em>multi-leader election</em>
+that induces <em>network partitioning</em> and
+suppors explicit <em>prioritisation</em>
+and <em>arbitrary metrics</em>.</p>
+<ul>
+<li>It <em>performs better</em> than other multi-leader election algorithms in most scenarios</li>
+<li><em>Corner cases</em> where the behaviour is bad can get built
+<ul>
+<li>but it looks pretty <em>unlikely</em> that they occur</li>
+</ul>
+</li>
+</ul>
+
+
+<span class='fragment ' >
+  <h3 id="what-lies-ahead">What lies ahead</h3>
+<ul>
+<li>More testing is needed to assess how frequently the configuration can induce unwanted behaviour</li>
+<li>Tackle cases where the behaviour is not ideal</li>
+<li>Towards a new family of self-stabilising leader election algorithms?</li>
+</ul>
+
+</span>
+
 </section>
 
   
