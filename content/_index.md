@@ -7,7 +7,7 @@ outputs = ["Reveal"]
 
 +++
 
-{{% slide background-iframe="net.html" transition="slide" preload="true" %}}
+{{% slide background-image="background.png" transition="slide" preload="true" %}}
 
 <script>
   function hslToHex(h, s, l) {
@@ -36,7 +36,7 @@ I'd like to start by dissecting the title
 
 ---
 
-{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
+{{% slide background-image="background.png" transition="slide" preload="true"  %}}
 
 # <span style="color: #ff5d65ff">Self-stabilising</span> <span style="color: #8d60ffff">Priority-Based</span> <span style="color: #57ffe6ff">Multi-</span>Leader Election <span style="color: #cbff50ff">and Network Partitioning</span>
 
@@ -46,7 +46,7 @@ Let us start from the core, leader election
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # <span style="color: #ff5d6540">Self-stabilising</span> <span style="color: #8d60ff40">Priority-Based</span> <span style="color: #57ffe640">Multi-</span>Leader Election <span style="color: #cbff5040">and Network Partitioning</span>
 
@@ -91,7 +91,7 @@ anychart.data.loadJsonFile('network.json', function (data) {
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # <span style="color: #ff5d6540">Self-stabilising</span> <span style="color: #8d60ff40">Priority-Based</span> <span style="color: #57ffe640">Multi-</span>Leader Election <span style="color: #cbff5040">and Network Partitioning</span>
 
@@ -137,7 +137,7 @@ anychart.data.loadJsonFile('network.json', function (data) {
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # <span style="color: #ff5d6540">Self-stabilising</span> <span style="color: #8d60ff40">Priority-Based</span> <span style="color: #57ffe640">Multi-</span>Leader Election <span style="color: #cbff5040">and Network Partitioning</span>
 
@@ -149,7 +149,7 @@ anychart.data.loadJsonFile('network.json', function (data) {
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # <span style="color: #ff5d6540">Self-stabilising</span> <span style="color: #8d60ff40">Priority-Based</span> <span style="color: #57ffe6ff">Multi-</span>Leader Election <span style="color: #cbff5040">and Network Partitioning</span>
 
@@ -174,30 +174,22 @@ anychart.data.loadJsonFile('network.json', function (data) {
   chart.background().fill("#fff0f030");
   var edges = chart.edges()
   edges.stroke("4 #ffffff")
-  edges.hovered().stroke("5 #00ff00")
   edges.selected().stroke("5 #00ff00")
   edges.tooltip().enabled(false)
   var nodes = chart.nodes();
   nodes.height(60)
   nodes.fill("#1f2428")
-  nodes.hovered().fill("#ffffff")
   nodes.hovered().stroke("5 #00ff00")
   nodes.selected().fill("#ffffff")
   nodes.selected().stroke("5 #00ff00")
   nodes.stroke("4 #ffffff")
   nodes.tooltip().enabled(false)
   var labels = nodes.labels()
-  var hoveredLabels = nodes.hovered().labels()
-  var selectedLabels = nodes.selected().labels()
   labels.format("{%id}");
-  labels.fontSize(20);
-  labels.fontWeight(600);
   labels.anchor("center")
   labels.position("center")
-  hoveredLabels.enabled(true);
-  selectedLabels.enabled(false);
-  // hoveredLabels.fontColor("#000000")
-  labels.fontColor("black")
+  labels.fontSize(20);
+  labels.fontWeight(600);
   chart.interactivity().enabled(false)
   chart.container("multileader").draw();
 })
@@ -207,7 +199,7 @@ anychart.data.loadJsonFile('network.json', function (data) {
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # <span style="color: #ff5d6540">Self-stabilising</span> <span style="color: #8d60ff40">Priority-Based</span> <span style="color: #57ffe6ff">Multi-</span>Leader Election <span style="color: #cbff5040">and Network Partitioning</span>
 
@@ -220,7 +212,7 @@ anychart.data.loadJsonFile('network.json', function (data) {
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # <span style="color: #ff5d6540">Self-stabilising</span> <span style="color: #8d60ff40">Priority-Based</span> <span style="color: #57ffe6ff">Multi-</span>Leader Election <span style="color: #cbff5040">and Network Partitioning</span>
 
@@ -274,7 +266,7 @@ anychart.data.loadJsonFile('network.json', function (data) {
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # <span style="color: #ff5d6540">Self-stabilising</span> <span style="color: #8d60ff40">Priority-Based</span> <span style="color: #57ffe6ff">Multi-</span>Leader Election <span style="color: #cbff5040">and Network Partitioning</span>
 
@@ -330,7 +322,7 @@ anychart.data.loadJsonFile('network.json', function (data) {
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # <span style="color: #ff5d6540">Self-stabilising</span> <span style="color: #8d60ff40">Priority-Based</span> <span style="color: #57ffe6ff">Multi-</span>Leader Election <span style="color: #cbff5040">and Network Partitioning</span>
 
@@ -391,7 +383,7 @@ anychart.data.loadJsonFile('network.json', function (data) {
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # <span style="color: #ff5d6540">Self-stabilising</span> <span style="color: #8d60ffff">Priority-Based</span> <span style="color: #57ffe6ff">Multi-</span>Leader Election <span style="color: #cbff5040">and Network Partitioning</span>
 
@@ -453,7 +445,7 @@ anychart.data.loadJsonFile('network.json', function (data) {
 
 ---
 
-{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
+{{% slide background-image="background.png" transition="slide" preload="true"  %}}
 
 # <span style="color: #ff5d6540">Self-stabilising</span> <span style="color: #8d60ffff">Priority-Based</span> <span style="color: #57ffe6ff">Multi-</span>Leader Election <span style="color: #cbff5040">and Network Partitioning</span>
 
@@ -467,7 +459,7 @@ anychart.data.loadJsonFile('network.json', function (data) {
 
 ---
 
-{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
+{{% slide background-image="background.png" transition="slide" preload="true"  %}}
 
 ## Self stabilisation
 
@@ -496,7 +488,7 @@ finite number of moves
 
 ---
 
-{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
+{{% slide background-image="background.png" transition="slide" preload="true"  %}}
 
 #### Example of **not**-self-stabilising leader election
 
@@ -507,7 +499,7 @@ the output *oscillates*
 
 ---
 
-{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
+{{% slide background-image="background.png" transition="slide" preload="true"  %}}
 
 # <span style="color: #ff5d65ff">Self-stabilising</span> <span style="color: #8d60ffff">Priority-Based</span> <span style="color: #57ffe6ff">Multi-</span>Leader Election <span style="color: #cbff5040">and Network Partitioning</span>
 
@@ -519,7 +511,7 @@ the output *oscillates*
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # <span style="color: #ff5d65ff">Self-stabilising</span> <span style="color: #8d60ffff">Priority-Based</span> <span style="color: #57ffe6ff">Multi-</span>Leader Election <span style="color: #cbff5040">and Network Partitioning</span>
 
@@ -543,17 +535,11 @@ anychart.data.loadJsonFile('network.json', function (data) {
   var edge = chart.group("edge")
   var edges = chart.edges()
   edges.stroke("4 #ffffff")
-  edges.hovered().stroke("5 #00ff00")
-  edges.selected().stroke("5 #00ff00")
   edges.tooltip().enabled(false)
   var nodes = chart.nodes();
   nodes.height(60)
   var fill = "black"
   nodes.fill(fill)
-  nodes.hovered().fill(fill)
-  nodes.hovered().stroke("5 #00ff00")
-  nodes.selected().fill(fill)
-  nodes.selected().stroke("5 #00ff00")
   nodes.stroke("4 #ffffff")
   nodes.tooltip().enabled(false)
   var labels = nodes.labels()
@@ -575,7 +561,7 @@ anychart.data.loadJsonFile('network.json', function (data) {
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # <span style="color: #ff5d65ff">Self-stabilising</span> <span style="color: #8d60ffff">Priority-Based</span> <span style="color: #57ffe6ff">Multi-</span>Leader Election <span style="color: #cbff50ff">and Network Partitioning</span>
 
@@ -649,10 +635,6 @@ anychart.data.loadJsonFile('network.json', function (data) {
   nodes.height(60)
   var fill = "black"
   nodes.fill(fill)
-  nodes.hovered().fill(fill)
-  nodes.hovered().stroke("5 #00ff00")
-  nodes.selected().fill(fill)
-  nodes.selected().stroke("5 #00ff00")
   nodes.stroke("4 #ffffff")
   nodes.tooltip().enabled(false)
   var labels = nodes.labels()
@@ -664,7 +646,7 @@ anychart.data.loadJsonFile('network.json', function (data) {
   labels.anchor("center")
   labels.position("center")
   labels.enabled(false)
-  hoveredLabels.enabled(true);
+  hoveredLabels.enabled(false);
   selectedLabels.enabled(false);
   // hoveredLabels.fontColor("#000000")
   labels.fontColor("black")
@@ -680,7 +662,7 @@ anychart.data.loadJsonFile('network.json', function (data) {
 
 ---
 
-{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
+{{% slide background-image="background.png" transition="slide" preload="true"  %}}
 
 # What is outside there
 
@@ -710,7 +692,7 @@ leader election algorithm using aggregate computing blocks**, *to appear*
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # Goals
 
@@ -725,7 +707,7 @@ leader election algorithm using aggregate computing blocks**, *to appear*
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # Trivial idea
 
@@ -823,21 +805,22 @@ function chartWithEnvironment(environmentFunction, container) {
   var labels = nodes.labels()
   var hoveredLabels = nodes.hovered().labels()
   var selectedLabels = nodes.selected().labels()
+  labels.enabled(true)
   labels.format("{%id}");
   labels.fontColor('white')
   labels.fontFamily('Inconsolata')
   labels.fontSize(35);
   labels.fontWeight(600);
-  labels.anchor("center")
   labels.position("center")
-  labels.enabled(true)
+  labels.anchor("center")
+  labels.offsetY(-1000)
   hoveredLabels.enabled(true);
   selectedLabels.enabled(false);
   // hoveredLabels.fontColor("#000000")
   var edges = chart.edges()
   edges.stroke("4 #ffffff")
-  edges.hovered().stroke("5 #00ff00")
-  edges.selected().stroke("5 #00ff00")
+  edges.hovered().stroke("4 white")
+  // edges.selected().stroke("5 #00ff00")
   edges.tooltip().enabled(false)
   chart.interactivity().enabled(false)
   chart.container(container).draw();
@@ -845,7 +828,7 @@ function chartWithEnvironment(environmentFunction, container) {
 }
 </script>
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # Trivial idea running example, I
 
@@ -858,7 +841,7 @@ The network begins the computation
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # Trivial idea running example, II
 
@@ -874,7 +857,7 @@ Every device knows only itself, it assumes leadership and tells neighbors
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # Trivial idea running example, III
 
@@ -923,7 +906,7 @@ Gossiping of the best leader information induces the creation of partitions
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # Trivial idea running example, IV
 
@@ -972,7 +955,7 @@ Regions form, but the spreading now reaches the maximum allowed dimension (2 hop
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # Trivial idea running example, V
 
@@ -1021,7 +1004,7 @@ Nodes that know they can not join the best leader they know restart the algorith
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # Trivial idea running example, VI
 
@@ -1070,7 +1053,7 @@ The "second best" leader search wave moves across the network
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # Trivial idea running example, VII
 
@@ -1119,7 +1102,7 @@ Previous areas get disrupted!
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # Trivial idea running example, VIII
 
@@ -1168,7 +1151,7 @@ New regions begin to form again in parts of the network that can't be controlled
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # Trivial idea running example, IX
 
@@ -1217,7 +1200,7 @@ All nodes joined the "second wave" of gossiping...
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # Trivial idea running example, X
 
@@ -1266,7 +1249,7 @@ All nodes joined the "second wave" of gossiping...
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # Trivial idea running example, XI
 
@@ -1315,7 +1298,7 @@ All nodes are now either stable or in their last recursion of the algorithm
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # Trivial idea running example, XII
 
@@ -1364,7 +1347,7 @@ Stable nodes do not propagate information on unstable partitions, slowing down c
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # Trivial idea running example, XIII
 
@@ -1413,7 +1396,7 @@ In one step, stability will be reached
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # Trivial idea running example, XIV
 
@@ -1462,7 +1445,7 @@ Done
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # Trivial idea
 
@@ -1495,7 +1478,7 @@ def leaderElection(id, priority, radius, metric) {
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # Bounded Election
 
@@ -1514,7 +1497,7 @@ Instead recursively gossiping, *parallelise* the computation and *compete at the
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # Bounded Election running, I
 
@@ -1527,7 +1510,7 @@ The network begins the computation
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # Bounded Election running, II
 
@@ -1543,7 +1526,7 @@ Every device knows only itself, it assumes leadership and tells neighbors
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # Bounded Election running, III
 
@@ -1592,7 +1575,7 @@ Partitions begin to form, several nodes remain in inconsistent state (gray-fille
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # Bounded Election running, IV
 
@@ -1641,7 +1624,7 @@ The first two partitions are formed! 25/32 nodes reached stability in two rounds
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # Bounded Election running, V
 
@@ -1690,7 +1673,7 @@ Stabilizing the outskirts of the network takes longer, especially if previous in
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # Bounded Election running, VI
 
@@ -1739,7 +1722,7 @@ In unlucky cases, several nodes may reset when their former leader is embodied i
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # Bounded Election running, VII
 
@@ -1788,7 +1771,7 @@ In the worst case, a partition restabilises in the time required for the new lea
 
 ---
 
-{{% slide background-iframe="net.html" transition="none" preload="true"  %}}
+{{% slide background-image="background.png" transition="none" preload="true"  %}}
 
 # Bounded Election running, VIII
 
@@ -1837,7 +1820,7 @@ The network is thus stable in eight rounds (compared to 14 of the recursive vers
 
 ---
 
-{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
+{{% slide background-image="background.png" transition="slide" preload="true"  %}}
 
 # Bounded Election
 
@@ -1861,7 +1844,7 @@ The network is thus stable in eight rounds (compared to 14 of the recursive vers
 
 {{% section %}}
 
-{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
+{{% slide background-image="background.png" transition="slide" preload="true"  %}}
 
 ## Self-stabilisation of Bounded Election
 
@@ -1874,7 +1857,7 @@ Proof structure:
 
 ---
 
-{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
+{{% slide background-image="background.png" transition="slide" preload="true"  %}}
 
 ## Proof
 
@@ -1890,7 +1873,7 @@ Where `x` is a neighbour field, namely a mapping from each device in the neighbo
 
 ---
 
-{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
+{{% slide background-image="background.png" transition="slide" preload="true"  %}}
 
 ### Rewrite: identity for `fR` 
 
@@ -1907,7 +1890,7 @@ share(x <- e) { minHoodLoc(fMP(x, s̄), e) }
 
 ---
 
-{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
+{{% slide background-image="background.png" transition="slide" preload="true"  %}}
 
 ### Rewrite: local candidacy for `e` 
 
@@ -1931,7 +1914,7 @@ share(x <- local) { minHoodLoc(fMP(x, s̄), local) }
 
 ---
 
-{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
+{{% slide background-image="background.png" transition="slide" preload="true"  %}}
 
 ### Rewrite: return the `id`
 
@@ -1950,7 +1933,7 @@ share(x <- local) { minHoodLoc(fMP(x, s̄), local) }.lead
 
 ---
 
-{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
+{{% slide background-image="background.png" transition="slide" preload="true"  %}}
 
 ### Rewrite: `fMP`
 
@@ -1981,7 +1964,7 @@ share(x <- local) {
 
 ---
 
-{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
+{{% slide background-image="background.png" transition="slide" preload="true"  %}}
 
 ### Minimisation
 
@@ -2010,7 +1993,7 @@ is a valid implementation of Bounded Election,
 
 ---
 
-{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
+{{% slide background-image="background.png" transition="slide" preload="true"  %}}
 
 # Evaluation
 
@@ -2024,7 +2007,7 @@ is a valid implementation of Bounded Election,
 
 {{% section %}}
 
-{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
+{{% slide background-image="background.png" transition="slide" preload="true"  %}}
 
 ## Metric
 
@@ -2036,7 +2019,7 @@ Measuring *adaptation* is not so easy
 
 ---
 
-{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
+{{% slide background-image="background.png" transition="slide" preload="true"  %}}
 
 ### Formally
 
@@ -2067,7 +2050,7 @@ by normalising the sum of the local contributions.
 
 ---
 
-{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
+{{% slide background-image="background.png" transition="slide" preload="true"  %}}
 
 ## Compared algorithms
 
@@ -2090,7 +2073,7 @@ by normalising the sum of the local contributions.
 
 ---
 
-{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
+{{% slide background-image="background.png" transition="slide" preload="true"  %}}
 
 ## Scale-free network
 
@@ -2108,7 +2091,7 @@ by normalising the sum of the local contributions.
 
 ---
 
-{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
+{{% slide background-image="background.png" transition="slide" preload="true"  %}}
 
 **Expectation**: Bounded Election performs best, the recursive version should outperform Sparse-choice or be close (prioritization of static nodes should compensate for occasional large disruptions)
 
@@ -2126,7 +2109,7 @@ by normalising the sum of the local contributions.
 
 ---
 
-{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
+{{% slide background-image="background.png" transition="slide" preload="true"  %}}
 
 **Expectation**: Nodes moving randomly favor **Sparse-choice**,
 that should perform best as it minimises changes within partitions by competing only on the border.
@@ -2147,7 +2130,7 @@ that should perform best as it minimises changes within partitions by competing 
 
 ---
 
-{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
+{{% slide background-image="background.png" transition="slide" preload="true"  %}}
 
 ## Conclusion
 
