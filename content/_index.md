@@ -26,12 +26,23 @@ outputs = ["Reveal"]
 
 ### [**Danilo Pianini**](mailto:danilo.pianini@unibo.it), [Roberto Casadei](mailto:roby.casadei@unibo.it), [Mirko Viroli](mailto:mirko.viroli@unibo.it)
 
+{{% note %}}
+Hello everyone
+
+this work introduces a novel network partitioning and multi-leader election algorithm
+
+I'd like to start by dissecting the title
+{{% /note %}}
 
 ---
 
 {{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
 
 # <span style="color: #ff5d65ff">Self-stabilising</span> <span style="color: #8d60ffff">Priority-Based</span> <span style="color: #57ffe6ff">Multi-</span>Leader Election <span style="color: #cbff50ff">and Network Partitioning</span>
+
+{{% note %}}
+Let us start from the core, leader election
+{{% /note %}}
 
 ---
 
@@ -1455,26 +1466,32 @@ Done
 
 # Trivial idea
 
+{{% fragment %}}
 **Pros**
 * Works
 * Uses solely diffusion, with no accumulation
 * Can be implemented very succintly using frameworks such as aggregate computing
+{{% /fragment %}}
 
+{{% fragment %}}
 ```haskell
 def leaderElection(id, priority, radius, metric) {
   let best = gossip([priority, id], min).get(1) -- best candidacy in the neighborhood
   if (distanceToWithMetric(best == id, metric) <= radius) {
     best -- We can be managed by the best known leader
-  } else { leaderElection(id, priority, radius) }
+  } else { leaderElection(id, priority, radius, metric) }
 }
 ```
+{{% /fragment %}}
 
+{{% fragment %}}
 **Cons**
 * It is *not self-stabilising* for many implementations (including the one above)
   * *Gossip* is not self-stabilising
   * It can be made self-stabilise by running overlapping replicates
 * *Discards useful information* when re-stabilising!
   * We had information on the second-best leader that we re-computed...
+{{% /fragment %}}
 
 ---
 
@@ -1484,6 +1501,7 @@ def leaderElection(id, priority, radius, metric) {
 
 Instead recursively gossiping, *parallelise* the computation and *compete at the border*
 
+{{% fragment %}}
 1. Every device produces its *opinion on the best leader*, which includes:
     1. the leader’s priority;
     2. the distance to the leader;
@@ -1492,6 +1510,7 @@ Instead recursively gossiping, *parallelise* the computation and *compete at the
 2. Every device $d$ observes the *best candidates in its neighbourhood*, discarding those that promote $d$ itself and those whose proposed leader is too far away.
 3. The *new best leader* is the best between itself and the best (if any) of those acquired from the neighbourhood.
 4. The best leader can be *communicated to the neighbours*.
+{{% /fragment %}}
 
 ---
 
@@ -1855,6 +1874,8 @@ Proof structure:
 
 ---
 
+{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
+
 ## Proof
 
 #### The minimising `share` pattern
@@ -1868,6 +1889,8 @@ share(x <- e) { fR(minHoodLoc(fMP(x, s̄), e), x)}
 Where `x` is a neighbour field, namely a mapping from each device in the neighbourhood of the executing device with some value.
 
 ---
+
+{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
 
 ### Rewrite: identity for `fR` 
 
@@ -1883,6 +1906,8 @@ share(x <- e) { minHoodLoc(fMP(x, s̄), e) }
 ```
 
 ---
+
+{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
 
 ### Rewrite: local candidacy for `e` 
 
@@ -1906,6 +1931,8 @@ share(x <- local) { minHoodLoc(fMP(x, s̄), local) }
 
 ---
 
+{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
+
 ### Rewrite: return the `id`
 
 * We want to return only the leader `id`
@@ -1922,6 +1949,8 @@ share(x <- local) { minHoodLoc(fMP(x, s̄), local) }.lead
 ```
 
 ---
+
+{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
 
 ### Rewrite: `fMP`
 
@@ -1950,8 +1979,9 @@ share(x <- local) {
 }.lead
 ```
 
-
 ---
+
+{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
 
 ### Minimisation
 
@@ -1980,6 +2010,8 @@ is a valid implementation of Bounded Election,
 
 ---
 
+{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
+
 # Evaluation
 
 | Scale free | Edge | Random |
@@ -1992,6 +2024,8 @@ is a valid implementation of Bounded Election,
 
 {{% section %}}
 
+{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
+
 ## Metric
 
 Measuring *adaptation* is not so easy
@@ -2001,6 +2035,8 @@ Measuring *adaptation* is not so easy
   * **the lesser, the better**
 
 ---
+
+{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
 
 ### Formally
 
@@ -2031,6 +2067,8 @@ by normalising the sum of the local contributions.
 
 ---
 
+{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
+
 ## Compared algorithms
 
 * *Bounded election* (`proposed`)
@@ -2052,6 +2090,8 @@ by normalising the sum of the local contributions.
 
 ---
 
+{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
+
 ## Scale-free network
 
 **Expectation**: Sparse-choice and Bounded Election perform similarly, the recursive version is worse
@@ -2068,6 +2108,8 @@ by normalising the sum of the local contributions.
 
 ---
 
+{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
+
 **Expectation**: Bounded Election performs best, the recursive version should outperform Sparse-choice or be close (prioritization of static nodes should compensate for occasional large disruptions)
 
 ## Asymmetric nodes
@@ -2083,6 +2125,8 @@ by normalising the sum of the local contributions.
 {{% /fragment %}}
 
 ---
+
+{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
 
 **Expectation**: Nodes moving randomly favor **Sparse-choice**,
 that should perform best as it minimises changes within partitions by competing only on the border.
@@ -2102,6 +2146,8 @@ that should perform best as it minimises changes within partitions by competing 
 
 
 ---
+
+{{% slide background-iframe="net.html" transition="slide" preload="true"  %}}
 
 ## Conclusion
 
