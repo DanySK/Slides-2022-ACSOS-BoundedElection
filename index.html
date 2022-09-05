@@ -44,12 +44,24 @@
 </script>
 <h1 id="self-stabilising-priority-based-multi-leader-election-and-network-partitioning">Self-stabilising Priority-Based Multi-Leader Election and Network Partitioning</h1>
 <h3 id="danilo-pianinimailtodanilopianiniuniboit-roberto-casadeimailtorobycasadeiuniboit-mirko-virolimailtomirkoviroliuniboit"><a href="mailto:danilo.pianini@unibo.it"><strong>Danilo Pianini</strong></a>, <a href="mailto:roby.casadei@unibo.it">Roberto Casadei</a>, <a href="mailto:mirko.viroli@unibo.it">Mirko Viroli</a></h3>
+
+
+
+<aside class="notes"><p>Hello everyone</p>
+<p>this work introduces a novel network partitioning and multi-leader election algorithm</p>
+<p>I&rsquo;d like to start by dissecting the title</p>
+</aside>
 </section>
 <section data-noprocess data-shortcode-slide
         data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
         data-preload="true"
         data-transition="slide">
 <h1 id="span-stylecolor-ff5d65ffself-stabilisingspan-span-stylecolor-8d60ffffpriority-basedspan-span-stylecolor-57ffe6ffmulti-spanleader-election-span-stylecolor-cbff50ffand-network-partitioningspan"><span style="color: #ff5d65ff">Self-stabilising</span> <span style="color: #8d60ffff">Priority-Based</span> <span style="color: #57ffe6ff">Multi-</span>Leader Election <span style="color: #cbff50ff">and Network Partitioning</span></h1>
+
+
+
+<aside class="notes"><p>Let us start from the core, leader election</p>
+</aside>
 </section>
 <section data-noprocess data-shortcode-slide
         data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
@@ -1632,19 +1644,34 @@ function chartWithEnvironment(environmentFunction, container) {
         data-preload="true"
         data-transition="none">
 <h1 id="trivial-idea-1">Trivial idea</h1>
-<p><strong>Pros</strong></p>
+
+
+<span class='fragment ' >
+  <p><strong>Pros</strong></p>
 <ul>
 <li>Works</li>
 <li>Uses solely diffusion, with no accumulation</li>
 <li>Can be implemented very succintly using frameworks such as aggregate computing</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape><span style="display:flex;"><span><span style="color:#50fa7b">def</span> leaderElection(id, priority, radius, metric) {
+
+</span>
+
+
+
+<span class='fragment ' >
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape><span style="display:flex;"><span><span style="color:#50fa7b">def</span> leaderElection(id, priority, radius, metric) {
 </span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">let</span> best <span style="color:#ff79c6">=</span> gossip([priority, id], min)<span style="color:#ff79c6">.</span>get(<span style="color:#bd93f9">1</span>) <span style="color:#6272a4">-- best candidacy in the neighborhood</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">if</span> (distanceToWithMetric(best <span style="color:#ff79c6">==</span> id, metric) <span style="color:#ff79c6">&lt;=</span> radius) {
 </span></span><span style="display:flex;"><span>    best <span style="color:#6272a4">-- We can be managed by the best known leader</span>
-</span></span><span style="display:flex;"><span>  } <span style="color:#ff79c6">else</span> { leaderElection(id, priority, radius) }
+</span></span><span style="display:flex;"><span>  } <span style="color:#ff79c6">else</span> { leaderElection(id, priority, radius, metric) }
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p><strong>Cons</strong></p>
+</span></span></code></pre></div>
+</span>
+
+
+
+<span class='fragment ' >
+  <p><strong>Cons</strong></p>
 <ul>
 <li>It is <em>not self-stabilising</em> for many implementations (including the one above)
 <ul>
@@ -1658,6 +1685,9 @@ function chartWithEnvironment(environmentFunction, container) {
 </ul>
 </li>
 </ul>
+
+</span>
+
 </section>
 <section data-noprocess data-shortcode-slide
         data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
@@ -1665,7 +1695,10 @@ function chartWithEnvironment(environmentFunction, container) {
         data-transition="none">
 <h1 id="bounded-election">Bounded Election</h1>
 <p>Instead recursively gossiping, <em>parallelise</em> the computation and <em>compete at the border</em></p>
-<ol>
+
+
+<span class='fragment ' >
+  <ol>
 <li>Every device produces its <em>opinion on the best leader</em>, which includes:
 <ol>
 <li>the leader’s priority;</li>
@@ -1678,6 +1711,9 @@ function chartWithEnvironment(environmentFunction, container) {
 <li>The <em>new best leader</em> is the best between itself and the best (if any) of those acquired from the neighbourhood.</li>
 <li>The best leader can be <em>communicated to the neighbours</em>.</li>
 </ol>
+
+</span>
+
 </section>
 <section data-noprocess data-shortcode-slide
         data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
@@ -2061,13 +2097,21 @@ function chartWithEnvironment(environmentFunction, container) {
 <li><em>Re-write</em> parts of it in a way that <em>preserves self-stabilisation</em></li>
 <li>Until you get to an implementation of <em>Bounded Election</em></li>
 </ol>
-</section><section>
+</section>
+<section data-noprocess data-shortcode-slide
+        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-preload="true"
+        data-transition="slide">
 <h2 id="proof">Proof</h2>
 <h4 id="the-minimising-share-pattern">The minimising <code>share</code> pattern</h4>
 <p>We start from a <a href="https://lmcs.episciences.org/6816">proven self-stabilising fragment</a>:</p>
 <pre tabindex="0"><code>share(x &lt;- e) { fR(minHoodLoc(fMP(x, s̄), e), x)}
 </code></pre><p>Where <code>x</code> is a neighbour field, namely a mapping from each device in the neighbourhood of the executing device with some value.</p>
-</section><section>
+</section>
+<section data-noprocess data-shortcode-slide
+        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-preload="true"
+        data-transition="slide">
 <h3 id="rewrite-identity-for-fr">Rewrite: identity for <code>fR</code></h3>
 <ul>
 <li><code>fR(x, p)</code> is a raising function w.r.t. partial orders of <code>x</code> and <code>p</code>, with <code>p</code> previous value of <code>x</code>
@@ -2079,7 +2123,11 @@ function chartWithEnvironment(environmentFunction, container) {
 <pre tabindex="0"><code>share(x &lt;- e) { fR(minHoodLoc(fMP(x, s̄), e), x)}
 </code></pre><p>$\big\Downarrow$</p>
 <pre tabindex="0"><code>share(x &lt;- e) { minHoodLoc(fMP(x, s̄), e) }
-</code></pre></section><section>
+</code></pre></section>
+<section data-noprocess data-shortcode-slide
+        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-preload="true"
+        data-transition="slide">
 <h3 id="rewrite-local-candidacy-for-e">Rewrite: local candidacy for <code>e</code></h3>
 <ul>
 <li><code>e</code> is any self-stabilising expression</li>
@@ -2101,7 +2149,11 @@ function chartWithEnvironment(environmentFunction, container) {
 </code></pre><p>$\big\Downarrow$</p>
 <pre tabindex="0"><code>local &lt;- (value: -priority, distance: 0, lead: id)
 share(x &lt;- local) { minHoodLoc(fMP(x, s̄), local) }
-</code></pre></section><section>
+</code></pre></section>
+<section data-noprocess data-shortcode-slide
+        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-preload="true"
+        data-transition="slide">
 <h3 id="rewrite-return-the-id">Rewrite: return the <code>id</code></h3>
 <ul>
 <li>We want to return only the leader <code>id</code></li>
@@ -2112,7 +2164,11 @@ share(x &lt;- local) { minHoodLoc(fMP(x, s̄), local) }
 </code></pre><p>$\big\Downarrow$</p>
 <pre tabindex="0"><code>local &lt;- (value: -priority, distance: 0, lead: id)
 share(x &lt;- local) { minHoodLoc(fMP(x, s̄), local) }.lead
-</code></pre></section><section>
+</code></pre></section>
+<section data-noprocess data-shortcode-slide
+        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-preload="true"
+        data-transition="slide">
 <h3 id="rewrite-fmp">Rewrite: <code>fMP</code></h3>
 <ul>
 <li><code>fMp(x, s̄)</code> is a monotonic progressive function of <code>x</code></li>
@@ -2138,7 +2194,11 @@ share(x &lt;- local) {
     local
   )
 }.lead
-</code></pre></section><section>
+</code></pre></section>
+<section data-noprocess data-shortcode-slide
+        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-preload="true"
+        data-transition="slide">
 <h3 id="minimisation">Minimisation</h3>
 <ul>
 <li><code>minHoodLoc</code> is a function selecting the minimum among the field values and the provided local value</li>
@@ -2160,7 +2220,11 @@ share(x &lt;- local) {
 </div>
 
 </section>
-</section><section>
+</section>
+<section data-noprocess data-shortcode-slide
+        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-preload="true"
+        data-transition="slide">
 <h1 id="evaluation">Evaluation</h1>
 <table>
 <thead>
@@ -2188,10 +2252,14 @@ share(x &lt;- local) {
 </tr>
 </tbody>
 </table>
-</section><section>
+</section>
 
 
 <section data-shortcode-section>
+<section data-noprocess data-shortcode-slide
+        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-preload="true"
+        data-transition="slide">
 <h2 id="metric">Metric</h2>
 <p>Measuring <em>adaptation</em> is not so easy</p>
 <ul>
@@ -2203,7 +2271,11 @@ share(x &lt;- local) {
 </ul>
 </li>
 </ul>
-</section><section>
+</section>
+<section data-noprocess data-shortcode-slide
+        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-preload="true"
+        data-transition="slide">
 <h3 id="formally">Formally</h3>
 <ul>
 <li>let $I$ be the set of all possible device UIDs;</li>
@@ -2231,7 +2303,11 @@ by normalising the sum of the local contributions.</li>
 </ul>
 
 </section>
-</section><section>
+</section>
+<section data-noprocess data-shortcode-slide
+        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-preload="true"
+        data-transition="slide">
 <h2 id="compared-algorithms">Compared algorithms</h2>
 <ul>
 <li><em>Bounded election</em> (<code>proposed</code>)</li>
@@ -2259,7 +2335,11 @@ by normalising the sum of the local contributions.</li>
 
 </span>
 
-</section><section>
+</section>
+<section data-noprocess data-shortcode-slide
+        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-preload="true"
+        data-transition="slide">
 <h2 id="scale-free-network">Scale-free network</h2>
 <p><strong>Expectation</strong>: Sparse-choice and Bounded Election perform similarly, the recursive version is worse</p>
 
@@ -2274,7 +2354,11 @@ by normalising the sum of the local contributions.</li>
 
 </span>
 
-</section><section>
+</section>
+<section data-noprocess data-shortcode-slide
+        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-preload="true"
+        data-transition="slide">
 <p><strong>Expectation</strong>: Bounded Election performs best, the recursive version should outperform Sparse-choice or be close (prioritization of static nodes should compensate for occasional large disruptions)</p>
 <h2 id="asymmetric-nodes">Asymmetric nodes</h2>
 
@@ -2289,7 +2373,11 @@ by normalising the sum of the local contributions.</li>
 
 </span>
 
-</section><section>
+</section>
+<section data-noprocess data-shortcode-slide
+        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-preload="true"
+        data-transition="slide">
 <p><strong>Expectation</strong>: Nodes moving randomly favor <strong>Sparse-choice</strong>,
 that should perform best as it minimises changes within partitions by competing only on the border.</p>
 <h2 id="randomly-moving-nodes">Randomly moving nodes</h2>
@@ -2309,7 +2397,11 @@ that should perform best as it minimises changes within partitions by competing 
 
 </span>
 
-</section><section>
+</section>
+<section data-noprocess data-shortcode-slide
+        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-preload="true"
+        data-transition="slide">
 <h2 id="conclusion">Conclusion</h2>
 <p><strong>Bounded Election</strong> is a <em>proven self-stabilising</em> algorithm
 for <em>multi-leader election</em>
