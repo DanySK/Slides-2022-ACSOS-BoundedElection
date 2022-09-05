@@ -27,7 +27,7 @@
   
 
     <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="slide">
 <script>
@@ -53,7 +53,7 @@
 </aside>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="slide">
 <h1 id="span-stylecolor-ff5d65ffself-stabilisingspan-span-stylecolor-8d60ffffpriority-basedspan-span-stylecolor-57ffe6ffmulti-spanleader-election-span-stylecolor-cbff50ffand-network-partitioningspan"><span style="color: #ff5d65ff">Self-stabilising</span> <span style="color: #8d60ffff">Priority-Based</span> <span style="color: #57ffe6ff">Multi-</span>Leader Election <span style="color: #cbff50ff">and Network Partitioning</span></h1>
@@ -64,7 +64,7 @@
 </aside>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="span-stylecolor-ff5d6540self-stabilisingspan-span-stylecolor-8d60ff40priority-basedspan-span-stylecolor-57ffe640multi-spanleader-election-span-stylecolor-cbff5040and-network-partitioningspan"><span style="color: #ff5d6540">Self-stabilising</span> <span style="color: #8d60ff40">Priority-Based</span> <span style="color: #57ffe640">Multi-</span>Leader Election <span style="color: #cbff5040">and Network Partitioning</span></h1>
@@ -108,7 +108,7 @@ anychart.data.loadJsonFile('network.json', function (data) {
 </script>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="span-stylecolor-ff5d6540self-stabilisingspan-span-stylecolor-8d60ff40priority-basedspan-span-stylecolor-57ffe640multi-spanleader-election-span-stylecolor-cbff5040and-network-partitioningspan-1"><span style="color: #ff5d6540">Self-stabilising</span> <span style="color: #8d60ff40">Priority-Based</span> <span style="color: #57ffe640">Multi-</span>Leader Election <span style="color: #cbff5040">and Network Partitioning</span></h1>
@@ -153,7 +153,7 @@ anychart.data.loadJsonFile('network.json', function (data) {
 </script>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="span-stylecolor-ff5d6540self-stabilisingspan-span-stylecolor-8d60ff40priority-basedspan-span-stylecolor-57ffe640multi-spanleader-election-span-stylecolor-cbff5040and-network-partitioningspan-2"><span style="color: #ff5d6540">Self-stabilising</span> <span style="color: #8d60ff40">Priority-Based</span> <span style="color: #57ffe640">Multi-</span>Leader Election <span style="color: #cbff5040">and Network Partitioning</span></h1>
@@ -194,7 +194,7 @@ anychart.data.loadJsonFile('network.json', function (data) {
 </ul>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="span-stylecolor-ff5d6540self-stabilisingspan-span-stylecolor-8d60ff40priority-basedspan-span-stylecolor-57ffe6ffmulti-spanleader-election-span-stylecolor-cbff5040and-network-partitioningspan"><span style="color: #ff5d6540">Self-stabilising</span> <span style="color: #8d60ff40">Priority-Based</span> <span style="color: #57ffe6ff">Multi-</span>Leader Election <span style="color: #cbff5040">and Network Partitioning</span></h1>
@@ -220,30 +220,22 @@ anychart.data.loadJsonFile('network.json', function (data) {
   chart.background().fill("#fff0f030");
   var edges = chart.edges()
   edges.stroke("4 #ffffff")
-  edges.hovered().stroke("5 #00ff00")
   edges.selected().stroke("5 #00ff00")
   edges.tooltip().enabled(false)
   var nodes = chart.nodes();
   nodes.height(60)
   nodes.fill("#1f2428")
-  nodes.hovered().fill("#ffffff")
   nodes.hovered().stroke("5 #00ff00")
   nodes.selected().fill("#ffffff")
   nodes.selected().stroke("5 #00ff00")
   nodes.stroke("4 #ffffff")
   nodes.tooltip().enabled(false)
   var labels = nodes.labels()
-  var hoveredLabels = nodes.hovered().labels()
-  var selectedLabels = nodes.selected().labels()
   labels.format("{%id}");
-  labels.fontSize(20);
-  labels.fontWeight(600);
   labels.anchor("center")
   labels.position("center")
-  hoveredLabels.enabled(true);
-  selectedLabels.enabled(false);
-  // hoveredLabels.fontColor("#000000")
-  labels.fontColor("black")
+  labels.fontSize(20);
+  labels.fontWeight(600);
   chart.interactivity().enabled(false)
   chart.container("multileader").draw();
 })
@@ -253,7 +245,7 @@ anychart.data.loadJsonFile('network.json', function (data) {
 
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="span-stylecolor-ff5d6540self-stabilisingspan-span-stylecolor-8d60ff40priority-basedspan-span-stylecolor-57ffe6ffmulti-spanleader-election-span-stylecolor-cbff5040and-network-partitioningspan-1"><span style="color: #ff5d6540">Self-stabilising</span> <span style="color: #8d60ff40">Priority-Based</span> <span style="color: #57ffe6ff">Multi-</span>Leader Election <span style="color: #cbff5040">and Network Partitioning</span></h1>
@@ -303,7 +295,7 @@ anychart.data.loadJsonFile('network.json', function (data) {
 </ul>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="span-stylecolor-ff5d6540self-stabilisingspan-span-stylecolor-8d60ff40priority-basedspan-span-stylecolor-57ffe6ffmulti-spanleader-election-span-stylecolor-cbff5040and-network-partitioningspan-2"><span style="color: #ff5d6540">Self-stabilising</span> <span style="color: #8d60ff40">Priority-Based</span> <span style="color: #57ffe6ff">Multi-</span>Leader Election <span style="color: #cbff5040">and Network Partitioning</span></h1>
@@ -356,7 +348,7 @@ anychart.data.loadJsonFile('network.json', function (data) {
 </script>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="span-stylecolor-ff5d6540self-stabilisingspan-span-stylecolor-8d60ff40priority-basedspan-span-stylecolor-57ffe6ffmulti-spanleader-election-span-stylecolor-cbff5040and-network-partitioningspan-3"><span style="color: #ff5d6540">Self-stabilising</span> <span style="color: #8d60ff40">Priority-Based</span> <span style="color: #57ffe6ff">Multi-</span>Leader Election <span style="color: #cbff5040">and Network Partitioning</span></h1>
@@ -411,7 +403,7 @@ anychart.data.loadJsonFile('network.json', function (data) {
 </script>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="span-stylecolor-ff5d6540self-stabilisingspan-span-stylecolor-8d60ff40priority-basedspan-span-stylecolor-57ffe6ffmulti-spanleader-election-span-stylecolor-cbff5040and-network-partitioningspan-4"><span style="color: #ff5d6540">Self-stabilising</span> <span style="color: #8d60ff40">Priority-Based</span> <span style="color: #57ffe6ff">Multi-</span>Leader Election <span style="color: #cbff5040">and Network Partitioning</span></h1>
@@ -471,7 +463,7 @@ anychart.data.loadJsonFile('network.json', function (data) {
 </script>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="span-stylecolor-ff5d6540self-stabilisingspan-span-stylecolor-8d60ffffpriority-basedspan-span-stylecolor-57ffe6ffmulti-spanleader-election-span-stylecolor-cbff5040and-network-partitioningspan"><span style="color: #ff5d6540">Self-stabilising</span> <span style="color: #8d60ffff">Priority-Based</span> <span style="color: #57ffe6ff">Multi-</span>Leader Election <span style="color: #cbff5040">and Network Partitioning</span></h1>
@@ -532,7 +524,7 @@ anychart.data.loadJsonFile('network.json', function (data) {
 </script>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="slide">
 <h1 id="span-stylecolor-ff5d6540self-stabilisingspan-span-stylecolor-8d60ffffpriority-basedspan-span-stylecolor-57ffe6ffmulti-spanleader-election-span-stylecolor-cbff5040and-network-partitioningspan-1"><span style="color: #ff5d6540">Self-stabilising</span> <span style="color: #8d60ffff">Priority-Based</span> <span style="color: #57ffe6ff">Multi-</span>Leader Election <span style="color: #cbff5040">and Network Partitioning</span></h1>
@@ -553,7 +545,7 @@ anychart.data.loadJsonFile('network.json', function (data) {
 </ul>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="slide">
 <h2 id="self-stabilisation">Self stabilisation</h2>
@@ -604,7 +596,7 @@ finite number of moves
 
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="slide">
 <h4 id="example-of-not-self-stabilising-leader-election">Example of <strong>not</strong>-self-stabilising leader election</h4>
@@ -613,7 +605,7 @@ the output <em>oscillates</em></p>
 <p><img src="https://github.com/DanySK/experiment-2022-self-stab-leader-election/raw/master/s-unstable.gif" alt=""></p>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="slide">
 <h1 id="span-stylecolor-ff5d65ffself-stabilisingspan-span-stylecolor-8d60ffffpriority-basedspan-span-stylecolor-57ffe6ffmulti-spanleader-election-span-stylecolor-cbff5040and-network-partitioningspan"><span style="color: #ff5d65ff">Self-stabilising</span> <span style="color: #8d60ffff">Priority-Based</span> <span style="color: #57ffe6ff">Multi-</span>Leader Election <span style="color: #cbff5040">and Network Partitioning</span></h1>
@@ -629,7 +621,7 @@ the output <em>oscillates</em></p>
 </ul>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="span-stylecolor-ff5d65ffself-stabilisingspan-span-stylecolor-8d60ffffpriority-basedspan-span-stylecolor-57ffe6ffmulti-spanleader-election-span-stylecolor-cbff5040and-network-partitioningspan-1"><span style="color: #ff5d65ff">Self-stabilising</span> <span style="color: #8d60ffff">Priority-Based</span> <span style="color: #57ffe6ff">Multi-</span>Leader Election <span style="color: #cbff5040">and Network Partitioning</span></h1>
@@ -653,17 +645,11 @@ anychart.data.loadJsonFile('network.json', function (data) {
   var edge = chart.group("edge")
   var edges = chart.edges()
   edges.stroke("4 #ffffff")
-  edges.hovered().stroke("5 #00ff00")
-  edges.selected().stroke("5 #00ff00")
   edges.tooltip().enabled(false)
   var nodes = chart.nodes();
   nodes.height(60)
   var fill = "black"
   nodes.fill(fill)
-  nodes.hovered().fill(fill)
-  nodes.hovered().stroke("5 #00ff00")
-  nodes.selected().fill(fill)
-  nodes.selected().stroke("5 #00ff00")
   nodes.stroke("4 #ffffff")
   nodes.tooltip().enabled(false)
   var labels = nodes.labels()
@@ -684,7 +670,7 @@ anychart.data.loadJsonFile('network.json', function (data) {
 </script>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="span-stylecolor-ff5d65ffself-stabilisingspan-span-stylecolor-8d60ffffpriority-basedspan-span-stylecolor-57ffe6ffmulti-spanleader-election-span-stylecolor-cbff50ffand-network-partitioningspan-1"><span style="color: #ff5d65ff">Self-stabilising</span> <span style="color: #8d60ffff">Priority-Based</span> <span style="color: #57ffe6ff">Multi-</span>Leader Election <span style="color: #cbff50ff">and Network Partitioning</span></h1>
@@ -758,10 +744,6 @@ anychart.data.loadJsonFile('network.json', function (data) {
   nodes.height(60)
   var fill = "black"
   nodes.fill(fill)
-  nodes.hovered().fill(fill)
-  nodes.hovered().stroke("5 #00ff00")
-  nodes.selected().fill(fill)
-  nodes.selected().stroke("5 #00ff00")
   nodes.stroke("4 #ffffff")
   nodes.tooltip().enabled(false)
   var labels = nodes.labels()
@@ -773,7 +755,7 @@ anychart.data.loadJsonFile('network.json', function (data) {
   labels.anchor("center")
   labels.position("center")
   labels.enabled(false)
-  hoveredLabels.enabled(true);
+  hoveredLabels.enabled(false);
   selectedLabels.enabled(false);
   // hoveredLabels.fontColor("#000000")
   labels.fontColor("black")
@@ -788,7 +770,7 @@ anychart.data.loadJsonFile('network.json', function (data) {
 </script>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="slide">
 <h1 id="what-is-outside-there">What is outside there</h1>
@@ -842,7 +824,7 @@ leader election algorithm using aggregate computing blocks</strong>, <em>to appe
 
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="goals">Goals</h1>
@@ -904,7 +886,7 @@ leader election algorithm using aggregate computing blocks</strong>, <em>to appe
 </ul>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="trivial-idea">Trivial idea</h1>
@@ -1029,21 +1011,22 @@ function chartWithEnvironment(environmentFunction, container) {
   var labels = nodes.labels()
   var hoveredLabels = nodes.hovered().labels()
   var selectedLabels = nodes.selected().labels()
+  labels.enabled(true)
   labels.format("{%id}");
   labels.fontColor('white')
   labels.fontFamily('Inconsolata')
   labels.fontSize(35);
   labels.fontWeight(600);
-  labels.anchor("center")
   labels.position("center")
-  labels.enabled(true)
+  labels.anchor("center")
+  labels.offsetY(-1000)
   hoveredLabels.enabled(true);
   selectedLabels.enabled(false);
   // hoveredLabels.fontColor("#000000")
   var edges = chart.edges()
   edges.stroke("4 #ffffff")
-  edges.hovered().stroke("5 #00ff00")
-  edges.selected().stroke("5 #00ff00")
+  edges.hovered().stroke("4 white")
+  // edges.selected().stroke("5 #00ff00")
   edges.tooltip().enabled(false)
   chart.interactivity().enabled(false)
   chart.container(container).draw();
@@ -1051,7 +1034,7 @@ function chartWithEnvironment(environmentFunction, container) {
 }
 </script>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="trivial-idea-running-example-i">Trivial idea running example, I</h1>
@@ -1062,7 +1045,7 @@ function chartWithEnvironment(environmentFunction, container) {
 <p>The network begins the computation</p>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="trivial-idea-running-example-ii">Trivial idea running example, II</h1>
@@ -1076,7 +1059,7 @@ function chartWithEnvironment(environmentFunction, container) {
 <p>Every device knows only itself, it assumes leadership and tells neighbors</p>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="trivial-idea-running-example-iii">Trivial idea running example, III</h1>
@@ -1123,7 +1106,7 @@ function chartWithEnvironment(environmentFunction, container) {
 <p>Gossiping of the best leader information induces the creation of partitions</p>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="trivial-idea-running-example-iv">Trivial idea running example, IV</h1>
@@ -1170,7 +1153,7 @@ function chartWithEnvironment(environmentFunction, container) {
 <p>Regions form, but the spreading now reaches the maximum allowed dimension (2 hops)</p>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="trivial-idea-running-example-v">Trivial idea running example, V</h1>
@@ -1217,7 +1200,7 @@ function chartWithEnvironment(environmentFunction, container) {
 <p>Nodes that know they can not join the best leader they know restart the algorithm</p>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="trivial-idea-running-example-vi">Trivial idea running example, VI</h1>
@@ -1264,7 +1247,7 @@ function chartWithEnvironment(environmentFunction, container) {
 <p>The &ldquo;second best&rdquo; leader search wave moves across the network</p>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="trivial-idea-running-example-vii">Trivial idea running example, VII</h1>
@@ -1311,7 +1294,7 @@ function chartWithEnvironment(environmentFunction, container) {
 <p>Previous areas get disrupted!</p>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="trivial-idea-running-example-viii">Trivial idea running example, VIII</h1>
@@ -1358,7 +1341,7 @@ function chartWithEnvironment(environmentFunction, container) {
 <p>New regions begin to form again in parts of the network that can&rsquo;t be controlled by the best node</p>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="trivial-idea-running-example-ix">Trivial idea running example, IX</h1>
@@ -1405,7 +1388,7 @@ function chartWithEnvironment(environmentFunction, container) {
 <p>All nodes joined the &ldquo;second wave&rdquo; of gossiping&hellip;</p>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="trivial-idea-running-example-x">Trivial idea running example, X</h1>
@@ -1452,7 +1435,7 @@ function chartWithEnvironment(environmentFunction, container) {
 <p>&hellip;which does not cover the whole network, so a third restart happens</p>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="trivial-idea-running-example-xi">Trivial idea running example, XI</h1>
@@ -1499,7 +1482,7 @@ function chartWithEnvironment(environmentFunction, container) {
 <p>All nodes are now either stable or in their last recursion of the algorithm</p>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="trivial-idea-running-example-xii">Trivial idea running example, XII</h1>
@@ -1546,7 +1529,7 @@ function chartWithEnvironment(environmentFunction, container) {
 <p>Stable nodes do not propagate information on unstable partitions, slowing down convergence</p>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="trivial-idea-running-example-xiii">Trivial idea running example, XIII</h1>
@@ -1593,7 +1576,7 @@ function chartWithEnvironment(environmentFunction, container) {
 <p>In one step, stability will be reached</p>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="trivial-idea-running-example-xiv">Trivial idea running example, XIV</h1>
@@ -1640,7 +1623,7 @@ function chartWithEnvironment(environmentFunction, container) {
 <p>Done</p>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="trivial-idea-1">Trivial idea</h1>
@@ -1690,7 +1673,7 @@ function chartWithEnvironment(environmentFunction, container) {
 
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="bounded-election">Bounded Election</h1>
@@ -1716,7 +1699,7 @@ function chartWithEnvironment(environmentFunction, container) {
 
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="bounded-election-running-i">Bounded Election running, I</h1>
@@ -1727,7 +1710,7 @@ function chartWithEnvironment(environmentFunction, container) {
 <p>The network begins the computation</p>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="bounded-election-running-ii">Bounded Election running, II</h1>
@@ -1741,7 +1724,7 @@ function chartWithEnvironment(environmentFunction, container) {
 <p>Every device knows only itself, it assumes leadership and tells neighbors</p>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="bounded-election-running-iii">Bounded Election running, III</h1>
@@ -1788,7 +1771,7 @@ function chartWithEnvironment(environmentFunction, container) {
 <p>Partitions begin to form, several nodes remain in inconsistent state (gray-filled)</p>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="bounded-election-running-iv">Bounded Election running, IV</h1>
@@ -1835,7 +1818,7 @@ function chartWithEnvironment(environmentFunction, container) {
 <p>The first two partitions are formed! 25/32 nodes reached stability in two rounds</p>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="bounded-election-running-v">Bounded Election running, V</h1>
@@ -1882,7 +1865,7 @@ function chartWithEnvironment(environmentFunction, container) {
 <p>Stabilizing the outskirts of the network takes longer, especially if previous information is useless</p>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="bounded-election-running-vi">Bounded Election running, VI</h1>
@@ -1929,7 +1912,7 @@ function chartWithEnvironment(environmentFunction, container) {
 <p>In unlucky cases, several nodes may reset when their former leader is embodied in another partition</p>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="bounded-election-running-vii">Bounded Election running, VII</h1>
@@ -1976,7 +1959,7 @@ function chartWithEnvironment(environmentFunction, container) {
 <p>In the worst case, a partition restabilises in the time required for the new leader to reach the farthest node</p>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="none">
 <h1 id="bounded-election-running-viii">Bounded Election running, VIII</h1>
@@ -2023,7 +2006,7 @@ function chartWithEnvironment(environmentFunction, container) {
 <p>The network is thus stable in eight rounds (compared to 14 of the recursive version)</p>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="slide">
 <h1 id="bounded-election-1">Bounded Election</h1>
@@ -2086,7 +2069,7 @@ function chartWithEnvironment(environmentFunction, container) {
 
 <section data-shortcode-section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="slide">
 <h2 id="self-stabilisation-of-bounded-election">Self-stabilisation of Bounded Election</h2>
@@ -2099,7 +2082,7 @@ function chartWithEnvironment(environmentFunction, container) {
 </ol>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="slide">
 <h2 id="proof">Proof</h2>
@@ -2109,7 +2092,7 @@ function chartWithEnvironment(environmentFunction, container) {
 </code></pre><p>Where <code>x</code> is a neighbour field, namely a mapping from each device in the neighbourhood of the executing device with some value.</p>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="slide">
 <h3 id="rewrite-identity-for-fr">Rewrite: identity for <code>fR</code></h3>
@@ -2125,7 +2108,7 @@ function chartWithEnvironment(environmentFunction, container) {
 <pre tabindex="0"><code>share(x &lt;- e) { minHoodLoc(fMP(x, s̄), e) }
 </code></pre></section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="slide">
 <h3 id="rewrite-local-candidacy-for-e">Rewrite: local candidacy for <code>e</code></h3>
@@ -2151,7 +2134,7 @@ function chartWithEnvironment(environmentFunction, container) {
 share(x &lt;- local) { minHoodLoc(fMP(x, s̄), local) }
 </code></pre></section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="slide">
 <h3 id="rewrite-return-the-id">Rewrite: return the <code>id</code></h3>
@@ -2166,7 +2149,7 @@ share(x &lt;- local) { minHoodLoc(fMP(x, s̄), local) }
 share(x &lt;- local) { minHoodLoc(fMP(x, s̄), local) }.lead
 </code></pre></section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="slide">
 <h3 id="rewrite-fmp">Rewrite: <code>fMP</code></h3>
@@ -2196,7 +2179,7 @@ share(x &lt;- local) {
 }.lead
 </code></pre></section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="slide">
 <h3 id="minimisation">Minimisation</h3>
@@ -2222,7 +2205,7 @@ share(x &lt;- local) {
 </section>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="slide">
 <h1 id="evaluation">Evaluation</h1>
@@ -2257,7 +2240,7 @@ share(x &lt;- local) {
 
 <section data-shortcode-section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="slide">
 <h2 id="metric">Metric</h2>
@@ -2273,7 +2256,7 @@ share(x &lt;- local) {
 </ul>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="slide">
 <h3 id="formally">Formally</h3>
@@ -2305,7 +2288,7 @@ by normalising the sum of the local contributions.</li>
 </section>
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="slide">
 <h2 id="compared-algorithms">Compared algorithms</h2>
@@ -2337,7 +2320,7 @@ by normalising the sum of the local contributions.</li>
 
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="slide">
 <h2 id="scale-free-network">Scale-free network</h2>
@@ -2356,7 +2339,7 @@ by normalising the sum of the local contributions.</li>
 
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="slide">
 <p><strong>Expectation</strong>: Bounded Election performs best, the recursive version should outperform Sparse-choice or be close (prioritization of static nodes should compensate for occasional large disruptions)</p>
@@ -2375,7 +2358,7 @@ by normalising the sum of the local contributions.</li>
 
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="slide">
 <p><strong>Expectation</strong>: Nodes moving randomly favor <strong>Sparse-choice</strong>,
@@ -2399,7 +2382,7 @@ that should perform best as it minimises changes within partitions by competing 
 
 </section>
 <section data-noprocess data-shortcode-slide
-        data-background-iframe="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/net.html"
+        data-background-image="https://danysk.github.io/Slides-2022-ACSOS-BoundedElection/background.png"
         data-preload="true"
         data-transition="slide">
 <h2 id="conclusion">Conclusion</h2>
